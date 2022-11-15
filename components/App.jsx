@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "./Sidebar.jsx";
 import { EnergyConsumption } from "./EnergyConsumption.jsx";
 import { getReadings } from "../utils/reading";
-import { Box } from "./box";
+import { Box } from "./Box";
 
 export const App = () => {
   const [readings, setReadings] = useState();
