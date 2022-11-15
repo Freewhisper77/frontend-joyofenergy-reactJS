@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "./Sidebar.jsx";
 import { EnergyConsumption } from "./EnergyConsumption.jsx";
 import { getReadings } from "../utils/reading";
+import { Box } from "./box";
 
 export const App = () => {
   const [readings, setReadings] = useState();
@@ -22,6 +23,7 @@ export const App = () => {
       </aside>
       <article className="bg-very-light-grey p3 flex-auto overflow-auto">
         <EnergyConsumption readings={readings} />
+        <Box />
       </article>
     </div>
   );

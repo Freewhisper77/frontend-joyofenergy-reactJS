@@ -10,7 +10,7 @@ export const EnergyConsumption = ({ readings }) => {
 
   return (
     <>
-      <h1 className="regular darkgray line-height-1 mb3">Energy consumption</h1>
+      <h1 className="regular darkgray line-height-1 mb3">Energy dashboard</h1>
       <section className="mb3">
         <button
           className="
