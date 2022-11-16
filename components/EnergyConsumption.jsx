@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { renderChart } from "../utils/chart.js";
 import { groupByDay, sortByTime } from "../utils/reading";
-import { handleClick } from "./button";
+import LastDayBtn from "./LastDayBtn";
 
 export const EnergyConsumption = ({ readings }) => {
   const containerId = "usageChart";
@@ -31,25 +31,7 @@ export const EnergyConsumption = ({ readings }) => {
         >
           Last 30 days
         </button>
-        <button
-          id="last-day"
-          className="
-              last-day
-              h5
-              inline-block
-              shadow-2
-              pl2
-              pr2
-              pt1
-              pb1
-              roundedMore
-              border-grey
-              bold
-            "
-          onClick={() => handleClick()}
-        >
-          Last 24 hours
-        </button>
+        <LastDayBtn />
       </section>
       <section className="chartHeight mb3">
         <canvas id={containerId} />
