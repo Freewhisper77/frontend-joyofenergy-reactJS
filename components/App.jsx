@@ -6,12 +6,10 @@ import { Box } from "./Box";
 
 export const App = () => {
   const [readings, setReadings] = useState();
-
   useEffect(async () => {
     const result = await getReadings();
     setReadings(result);
   }, []);
-
   if (!readings) {
     return null;
   }
@@ -23,7 +21,7 @@ export const App = () => {
       </aside>
       <article className="bg-very-light-grey p3 flex-auto overflow-auto">
         <EnergyConsumption readings={readings} />
-        <Box />
+        <Box readings={readings} />
       </article>
     </div>
   );

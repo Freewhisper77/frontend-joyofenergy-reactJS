@@ -1,4 +1,6 @@
 import React from "react";
+import { groupByDay, sortByTime } from "../utils/reading";
+import { getPowerConsumption } from "../utils/box";
 
 const BoxSection = ({ title, usage, until }) => (
   <div className="regularBox overflow-hidden shadow-2 roundedMore">
@@ -8,12 +10,15 @@ const BoxSection = ({ title, usage, until }) => (
   </div>
 );
 
-export const Box = () => (
-  <>
+export const Box = ({ readings }) => {
+  const data = sortByTime(groupByDay(readings)).slice(-30);
+  const consumption = getPowerConsumption(data);
+
+  return (
     <section className="box flex">
       <BoxSection title="Cost 💰" usage="111" until="$" />
-      <BoxSection title="Consumption ⚡" usage="222" until="kwh" />
+      <BoxSection title="Consumption ⚡" usage={consumption} until="kwh" />
       <BoxSection title="Footprint 👟" usage="333" until="tonnes" />
     </section>
-  </>
-);
+  );
+};
