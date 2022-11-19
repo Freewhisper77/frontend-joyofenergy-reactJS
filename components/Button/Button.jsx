@@ -23,6 +23,7 @@ function Button({ content }) {
           roundedMore 
           border-grey 
           bold
+          mr2
           ${state ? "button-unClick" : "button"}
           `}
         onClick={handleClick}
