@@ -1,0 +1,36 @@
+import React, { useState } from "react";
+
+function Button({ content }) {
+
+  const [state, setState] = useState(false);
+
+  function handleClick() {
+    setState(true);
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        className={`
+          h5 
+          inline-block 
+          shadow-2 
+          pl2 
+          pr2 
+          pt1 
+          pb1 
+          roundedMore 
+          border-grey 
+          bold
+          ${state ? "button-unClick" : "button"}
+          `}
+        onClick={handleClick}
+      >
+        {content}
+      </button>
+    </>
+  );
+}
+
+export default Button;
