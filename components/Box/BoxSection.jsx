@@ -1,7 +1,7 @@
 import React from "react";
 import { groupByDay, sortByTime } from "../../utils/reading";
 import { getCost, getFootPrint, getPowerConsumption } from "./CostConsumption";
-import { Box } from "./box";
+import { Box } from "./Box";
 
 export const BoxSection = ({ readings }) => {
   const data = sortByTime(groupByDay(readings)).slice(-30);
