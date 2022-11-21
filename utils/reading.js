@@ -26,6 +26,26 @@ export const groupByDay = (readings) => {
   }));
 };
 
+export const groupByHour = (readings) => {
+  const groupedByDay = readings.reduce((curr, { time, value }) => {
+    const readingDate = new Date(time);
+    const hour = new Date(
+      readingDate.getFullYear(),
+      readingDate.getMonth(),
+      readingDate.getDate(),
+      readingDate.getHours()
+    ).getTime();
+    if (!curr[hour]) curr[hour] = 0;
+    curr[hour] += value;
+    return curr;
+  }, {});
+
+  return Object.entries(groupedByDay).map(([day, value]) => ({
+    time: Number(day),
+    value,
+  }));
+};
+
 export const sortByTime = (readings) => {
   return [...readings].sort(
     (readingA, readingB) => readingA.time - readingB.time

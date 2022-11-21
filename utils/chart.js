@@ -14,7 +14,7 @@ export const formatDateLabel = (timestamp) => {
   return `${formatPart(day)}/${formatPart(month + 1)}`;
 };
 
-export const renderChart = (containerId, readings) => {
+export const renderNewChart = (containerId, readings, labels) => {
   chartJs.Chart.defaults.font.size = "10px";
 
   chartJs.Chart.register.apply(
@@ -22,7 +22,6 @@ export const renderChart = (containerId, readings) => {
     Object.values(chartJs).filter((chartClass) => chartClass.id)
   );
 
-  const labels = readings.map(({ time }) => formatDateLabel(time));
   const values = readings.map(({ value }) => value);
 
   const data = {
