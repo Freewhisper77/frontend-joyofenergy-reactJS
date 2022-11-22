@@ -1,18 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "./Sidebar.jsx";
 import { EnergyConsumption } from "./EnergyConsumption.jsx";
-import { getReadings } from "../utils/reading";
+import {
+  getReadings,
+  groupByDay,
+  groupByHour,
+  sortByTime,
+} from "../utils/reading";
 import { BoxSection } from "./Box/BoxSection";
+import { formatDateLabel } from "../utils/chart";
 
 export const App = () => {
   const [readings, setReadings] = useState();
+  const [toggle, setToggle] = useState(true);
   useEffect(async () => {
     const result = await getReadings();
     setReadings(result);
   }, []);
+  console.log(toggle);
+  function myF() {
+    setToggle(!toggle);
+  }
+
   if (!readings) {
     return null;
   }
+
+  const dataOf30Days = sortByTime(groupByDay(readings)).slice(-30);
+  console.log("!", dataOf30Days);
+  const dataOf24Hours = sortByTime(groupByHour(readings)).slice(-24);
+
+  const labelsOf24Hours = [...Array(24).keys()].map((value) =>
+    value < 10 ? `0${value}` : `${value}`
+  );
+  const labelsOf30Days = dataOf30Days.map(({ time }) => formatDateLabel(time));
 
   return (
     <div className="background shadow-2 flex overflow-hidden">
@@ -20,7 +41,11 @@ export const App = () => {
         <Sidebar />
       </aside>
       <article className="bg-very-light-grey p3 flex-auto overflow-auto">
-        <EnergyConsumption readings={readings} />
+        <EnergyConsumption
+          isDone={myF}
+          data={toggle ? dataOf30Days : dataOf24Hours}
+          label={toggle ? labelsOf30Days : labelsOf24Hours}
+        />
         <BoxSection readings={readings} />
       </article>
     </div>
