@@ -17,9 +17,12 @@ export const App = () => {
     const result = await getReadings();
     setReadings(result);
   }, []);
-  console.log(toggle);
-  function myF() {
-    setToggle(!toggle);
+
+  function clickBtnOf30Days() {
+    setToggle(true);
+  }
+  function clickBtnOf24Hours() {
+    setToggle(false);
   }
 
   if (!readings) {
@@ -27,7 +30,6 @@ export const App = () => {
   }
 
   const dataOf30Days = sortByTime(groupByDay(readings)).slice(-30);
-  console.log("!", dataOf30Days);
   const dataOf24Hours = sortByTime(groupByHour(readings)).slice(-24);
 
   const labelsOf24Hours = [...Array(24).keys()].map((value) =>
@@ -42,11 +44,13 @@ export const App = () => {
       </aside>
       <article className="bg-very-light-grey p3 flex-auto overflow-auto">
         <EnergyConsumption
-          isDone={myF}
+          // isDone={toggle?clickBtnOf30Days():clickBtnOf24Hours()}
+          isClicked30DaysBtn={clickBtnOf30Days}
+          isClicked24HoursBtn={clickBtnOf24Hours}
           data={toggle ? dataOf30Days : dataOf24Hours}
           label={toggle ? labelsOf30Days : labelsOf24Hours}
         />
-        <BoxSection readings={readings} />
+        <BoxSection data={toggle ? dataOf30Days : dataOf24Hours} />
       </article>
     </div>
   );

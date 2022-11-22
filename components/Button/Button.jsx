@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-function Button({ content, isDone }) {
+function Button({ content, clicked }) {
   const [state, setState] = useState(false);
 
   function handleClick() {
     setState(true);
-    isDone();
+    clicked();
   }
 
   return (
